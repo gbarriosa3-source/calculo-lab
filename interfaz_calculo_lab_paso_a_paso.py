@@ -7,7 +7,7 @@ import math
 
 st.set_page_config(
     page_title="Cálculo Lab | Método de la arandela",
-    page_icon="📐",
+    page_icon="",
     layout="wide"
 )
 
@@ -130,34 +130,34 @@ def mostrar_procedimiento(R, r, a, b, integral_num, volumen_num):
         f"se obtiene simbólicamente para estas funciones."
     )
 
-st.title("📐 CALCULO LAB")
+st.title("CALCULO LAB")
 st.subheader("Proyecto de Cálculo II · Método de la arandela")
 st.markdown("---")
-st.header("🧮 Cálculo del volumen")
+st.header("Cálculo del volumen")
 st.write("Ingresa los radios y los límites de integración. El programa aproximará el volumen mediante Simpson 1/3 y mostrará el procedimiento matemático paso a paso.")
 
-with st.expander("📘 Fórmula y explicación", expanded=False):
+with st.expander("Fórmula y explicación", expanded=False):
     st.latex(r"V=\pi\int_a^b\left[R(x)^2-r(x)^2\right]\,dx")
     st.write("R(x) es el radio exterior, r(x) el radio interior y [a,b] el intervalo de integración. Los radios deben ser no negativos y R(x) debe ser mayor o igual que r(x) en el intervalo.")
 
 col1, col2 = st.columns(2, gap="large")
 with col1:
-    st.markdown("### 📝 Funciones")
+    st.markdown("### Funciones")
     R_text = st.text_input("Radio exterior R(x)", value="x**3+2", placeholder="Ejemplo: x**2")
     r_text = st.text_input("Radio interior r(x)", value="x**2", placeholder="Ejemplo: x")
 with col2:
-    st.markdown("### 📏 Límites de integración")
+    st.markdown("### Límites de integración")
     a = st.number_input("Límite inferior a", value=0.0, step=0.5, format="%.4f")
     b = st.number_input("Límite superior b", value=2.0, step=0.5, format="%.4f")
     n = st.number_input("Número de subintervalos (debe ser par)", min_value=2, max_value=200000, value=1000, step=2)
 
 button_col1, button_col2, button_col3 = st.columns([2, 1, 1])
 with button_col1:
-    calculate = st.button("🧮 Calcular volumen", type="primary", use_container_width=True)
+    calculate = st.button("Calcular volumen", type="primary", use_container_width=True)
 with button_col2:
-    example = st.button("✨ Cargar ejemplo", use_container_width=True)
+    example = st.button("Cargar ejemplo", use_container_width=True)
 with button_col3:
-    clear = st.button("🧹 Limpiar datos", use_container_width=True)
+    clear = st.button("Limpiar datos", use_container_width=True)
 
 if example:
     st.info("Ejemplo sugerido: R(x)=x**3+2, r(x)=x**2, intervalo [0, 2]. Si los campos no se actualizan automáticamente, escríbelos manualmente.")
@@ -200,14 +200,14 @@ if calculate:
         volume_num = max(0.0, volume_num)
 
         st.markdown("---")
-        st.header("✅ Resultado")
+        st.header("Resultado")
         m1, m2, m3 = st.columns(3)
         m1.metric("Volumen aproximado", f"{volume_num:.6f} u³")
         m2.metric("Integral sin π", f"{integral_num:.6f}")
         m3.metric("Subintervalos", f"{int(n):,}")
         st.success(f"El volumen aproximado por el método de la arandela es **{volume_num:.6f} unidades cúbicas**.")
 
-        with st.expander("📚 Ver procedimiento completo paso a paso", expanded=True):
+        with st.expander("Ver procedimiento completo paso a paso", expanded=True):
             mostrar_procedimiento(R_expr, r_expr, a, b, integral_num, volume_num)
 
         xplot = np.linspace(a, b, 500)
